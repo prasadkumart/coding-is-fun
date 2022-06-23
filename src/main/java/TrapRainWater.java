@@ -1,6 +1,6 @@
 public class TrapRainWater {
 
-    public static int trap1(int[] height) {
+    public static int trapUsingArrays(int[] height) {
         if (null == height || height.length < 2) return 0;
 
         int leftMax = 0;
@@ -38,7 +38,7 @@ public class TrapRainWater {
     }
 
     public static void main(String[] args) {
-        System.out.println(trap1(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
-        System.out.println(trap1(new int[]{4,6,8}));
+        System.out.println(trapUsingArrays(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+        System.out.println(trapUsingArrays(new int[]{4,6,8}));
     }
 }

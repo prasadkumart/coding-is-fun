@@ -1,0 +1,104 @@
+//https://leetcode.com/problems/lru-cache/
+public class RotateListToLeft {
+
+
+
+    public static void main(String[] args) {
+        //System.out.println(new LRUCache().isValid("()"));
+        //System.out.println(new LRUCache().isValid("{{}[][[[]]]}"));
+        //ListNode head = new RotateListToLeft().createList(new int[]{1,2,3,4,5});
+        ListNode head = new RotateListToLeft().createList(new int[]{0,1,2});
+        new RotateListToLeft().traverse(head);
+        //head = new RotateList().rotateRight(head,1);
+        //new RotateList().traverse(head);
+
+        //head = new RotateListToLeft().rotateRight(head,1);
+        head = new RotateListToLeft().rotateRight(head,4);
+        new RotateListToLeft().traverse(head);
+    }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        if (null == head || null == head.next || k == 0) {
+            return head;
+        }
+
+        //int count = getCount(head);
+        ListNode tail = head;
+        int length = 1;
+        while(tail.next != null) {
+            length++;
+            tail = tail.next;
+        }
+
+        //point tail to head
+        tail.next=head;
+
+        //rotate tail position to new tail
+        k =  length - k%length ;
+        while(k>0) {
+            tail = tail.next;
+            k--;
+        }
+
+        head = tail.next;
+        tail.next = null; //tail 5 head 1
+
+        return head;
+    }
+
+    public int getCount(ListNode head) {
+        ListNode node = head.next;
+        int count = 0;
+        while(node != null) {
+            count++;
+            node = node.next;
+        }
+
+        return count;
+    }
+
+    public ListNode rotateList(ListNode head, int k) {
+        ListNode node = head.next;
+        int count = 0;
+        while(node != null) {
+            count++;
+            node = node.next;
+        }
+
+        return null;
+    }
+
+    public ListNode createList(int[] arr) {
+        ListNode head = null;
+        ListNode tailNode = head;
+        for (int i : arr) {
+            ListNode node = new ListNode(i);
+            if (null == head) {
+                head = node;
+            } else {
+                tailNode.next = node;
+            }
+            tailNode = node;
+        }
+
+        return head;
+    }
+
+    public void traverse(ListNode head) {
+        ListNode node = head;
+        int count = 0;
+        while(node != null) {
+            System.out.print(node.val + "->");
+            count++;
+            node = node.next;
+        }
+        System.out.println("\ncount " + count);
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }    }
+}
