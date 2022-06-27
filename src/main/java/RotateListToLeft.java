@@ -1,19 +1,12 @@
 //https://leetcode.com/problems/lru-cache/
 public class RotateListToLeft {
-
-
-
     public static void main(String[] args) {
-        //System.out.println(new LRUCache().isValid("()"));
-        //System.out.println(new LRUCache().isValid("{{}[][[[]]]}"));
-        //ListNode head = new RotateListToLeft().createList(new int[]{1,2,3,4,5});
-        ListNode head = new RotateListToLeft().createList(new int[]{0,1,2});
+        ListNode head = new RotateListToLeft().createList(new int[]{1, 2, 3, 4, 5});
         new RotateListToLeft().traverse(head);
         //head = new RotateList().rotateRight(head,1);
         //new RotateList().traverse(head);
 
-        //head = new RotateListToLeft().rotateRight(head,1);
-        head = new RotateListToLeft().rotateRight(head,4);
+        head = new RotateListToLeft().rotateRight(head, 2);
         new RotateListToLeft().traverse(head);
     }
 
@@ -23,25 +16,31 @@ public class RotateListToLeft {
         }
 
         //int count = getCount(head);
-        ListNode tail = head;
-        int length = 1;
-        while(tail.next != null) {
-            length++;
-            tail = tail.next;
+        ListNode nextNode = head.next;
+        ListNode tailNode = head.next;
+        int count = 0;
+        while (nextNode != null) {
+            count++;
+            tailNode = nextNode;
+            nextNode = nextNode.next;
         }
 
-        //point tail to head
-        tail.next=head;
+//        ListNode firstNode = head.next;
+//        nextNode = firstNode.next;
+//        tailNode.next = firstNode;
+//        tailNode = tailNode.next;
+//        head.next = nextNode;
 
-        //rotate tail position to new tail
-        k =  length - k%length ;
-        while(k>0) {
-            tail = tail.next;
+        k = (k <= count) ? k : k % count;
+        ListNode firstNode = head.next;
+        while (k > 0) {
+            tailNode.next = firstNode;
+            tailNode = firstNode;
+            firstNode = firstNode.next;
             k--;
         }
-
-        head = tail.next;
-        tail.next = null; //tail 5 head 1
+        head.next = firstNode;
+        tailNode.next = null;
 
         return head;
     }
@@ -69,12 +68,12 @@ public class RotateListToLeft {
     }
 
     public ListNode createList(int[] arr) {
-        ListNode head = null;
-        ListNode tailNode = head;
+        ListNode head = new ListNode();
+        ListNode tailNode = new ListNode();
         for (int i : arr) {
             ListNode node = new ListNode(i);
-            if (null == head) {
-                head = node;
+            if (null == head.next) {
+                head.next = node;
             } else {
                 tailNode.next = node;
             }
@@ -85,7 +84,7 @@ public class RotateListToLeft {
     }
 
     public void traverse(ListNode head) {
-        ListNode node = head;
+        ListNode node = head.next;
         int count = 0;
         while(node != null) {
             System.out.print(node.val + "->");

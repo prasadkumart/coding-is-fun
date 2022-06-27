@@ -1,5 +1,9 @@
+import java.util.Stack;
+
 //https://leetcode.com/problems/same-tree/solution/
 public class BinaryTree {
+    public static int longestPath = 0;
+
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         tree.root = new TreeNode(1);
@@ -28,16 +32,85 @@ public class BinaryTree {
 
         //tree comparison
         BinaryTree p = new BinaryTree();
-        p.root = new TreeNode(1);
-        p.root.left = new TreeNode(2);
+        p.root = new TreeNode(2);
+        p.root.left = new TreeNode(1);
         p.root.right = new TreeNode(3);
 
         BinaryTree q = new BinaryTree();
-        q.root = new TreeNode(1);
-        q.root.left = new TreeNode(2);
-        //q.root.right = new TreeNode(3);
+        q.root = new TreeNode(2);
+        //q.root.left = new TreeNode(1);
+        q.root.right = new TreeNode(3);
 
-        System.out.println(isSameTree(p.root, q.root));
+        System.out.println("SameTree: " + isSameTree(p.root, q.root));
+        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
+
+        System.out.println("isValidBST " + isValidBST(p.root));
+
+        System.out.println("isValidBST " + isValidBST(new TreeNode(-2147483648)));
+
+
+        q = new BinaryTree();
+        q.root = new TreeNode(3);
+        q.root.left = new TreeNode(9);
+        q.root.right = new TreeNode(20);
+        q.root.right.left = new TreeNode(15);
+        q.root.right.right = new TreeNode(7);
+        System.out.println("depth of the tree " + maxDepth(q.root));
+        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
+    }
+
+    //https://leetcode.com/problems/maximum-depth-of-binary-tree/
+    public static int maxDepth(TreeNode root) {
+        if (null == root) {
+            return 0;
+        }
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        return Math.max(left, right) + 1;
+    }
+
+
+    //https://leetcode.com/problems/diameter-of-binary-tree/
+    public static int diameterOfBinaryTree(TreeNode root) {
+        dfs(root);
+
+        return longestPath;
+    }
+
+    public static int dfs(TreeNode root) {
+        if (null == root) {
+            return 0;
+        }
+
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+
+        longestPath = Math.max(longestPath, left + right);
+        return Math.max(left, right) + 1;
+    }
+
+    //https://leetcode.com/problems/validate-binary-search-tree/
+    public static boolean isValidBST(TreeNode root) {
+        //had to use Double.MAX_VALUE to accommodate (-2147483648 : Integer.MIN_VALUE)
+        double leftNodeVal = -Double.MAX_VALUE;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || null != root) {
+
+            //add all left nodes to a stack
+            while (null != root) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            root = stack.pop();
+            if (root.val <= leftNodeVal) return false;
+            leftNodeVal = root.val;
+            root = root.right;
+        }
+
+        return true;
     }
 
     //Left, Root, Right
@@ -75,6 +148,7 @@ public class BinaryTree {
         printPostorder(node.right);
         System.out.println(node.val);
     }
+
     private void printPostorder() { printPostorder(root); }
 
     private void printInorder() { printInorder(root); }
@@ -82,7 +156,7 @@ public class BinaryTree {
     private void printPreorder() { printPreorder(root); }
 
     private void printLevelOrder() { //printLevelOrder(root);
-        }
+    }
 
     //root node
     TreeNode root;
@@ -98,7 +172,6 @@ public class BinaryTree {
         }
     }
 }
-
 
 //Definition for a binary tree node.
 class TreeNode {
@@ -119,3 +192,6 @@ class TreeNode {
         this.right = right;
     }
 }
+
+
+
