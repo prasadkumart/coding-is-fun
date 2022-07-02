@@ -9,30 +9,6 @@ public class MedianFinder {
         minHeap = new PriorityQueue<>();
     }
 
-    public static void main(String[] args) {
-        MedianFinder obj = new MedianFinder();
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(1);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(2);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(3);
-        System.out.println("Median : " + obj.findMedian());
-
-        obj = new MedianFinder();
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(-1);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(-2);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(-3);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(-4);
-        System.out.println("Median : " + obj.findMedian());
-        obj.addNum(-5);
-        System.out.println("Median : " + obj.findMedian());
-    }
-
     public void addNum(int num) {
         //if minHeap is zero
         //FIRST ADD TO minHeap*****
@@ -82,5 +58,29 @@ public class MedianFinder {
         } else if (minHeap.size() - maxHeap.size() > 1) {
             maxHeap.add(minHeap.poll());
         }
+    }
+
+    public static void main(String[] args) {
+        MedianFinder obj = new MedianFinder();
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(1);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(2);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(3);
+        System.out.println("Median : " + obj.findMedian());
+
+        obj = new MedianFinder();
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(-1);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(-2);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(-3);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(-4);
+        System.out.println("Median : " + obj.findMedian());
+        obj.addNum(-5);
+        System.out.println("Median : " + obj.findMedian());
     }
 }

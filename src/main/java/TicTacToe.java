@@ -15,19 +15,6 @@ public class TicTacToe {
         xDiagonal = 0;
     }
 
-    public static void main(String[] args) {
-        //Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
-        TicTacToe toe = new TicTacToe(3);
-
-        System.out.println(toe.move(0, 0, 1)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(0, 2, 2)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(2, 2, 1)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(1, 1, 2)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(2, 0, 1)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(1, 0, 2)); //-> Returns 0 (no one wins)
-        System.out.println(toe.move(2, 1, 1)); //-> Returns 1 (player 1 wins)
-    }
-
     public int move(int row, int col, int player) {
         //identify player
         int playerVal = (player == 1) ? 1 : -1;
@@ -57,5 +44,18 @@ public class TicTacToe {
         }
 
         return 0;
+    }
+
+    public static void main(String[] args) {
+        //Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
+        TicTacToe toe = new TicTacToe(3);
+
+        System.out.println(toe.move(0, 0, 1)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(0, 2, 2)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 2, 1)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(1, 1, 2)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 0, 1)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(1, 0, 2)); //-> Returns 0 (no one wins)
+        System.out.println(toe.move(2, 1, 1)); //-> Returns 1 (player 1 wins)
     }
 }

@@ -3,14 +3,6 @@ import java.util.LinkedList;
 
 //https://leetcode.com/problems/merge-intervals/
 public class MergeIntervals {
-    public static void main(String[] args) {
-        int[][] result = new MergeIntervals().merge(new int[][]{{1,2},{3,4},{9,10},{7,8}});
-        System.out.println(Arrays.deepToString(result));
-
-        result = new MergeIntervals().merge(new int[][]{{5,6},{1,2},{3,4},{8,9},{10,18}});
-        System.out.println(Arrays.deepToString(result));
-    }
-
     public int[][] merge(int[][] intervals) {
         //sort arrays
         Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0])); //O(NlonN) T
@@ -27,6 +19,14 @@ public class MergeIntervals {
         }
 
         return merged.toArray(new int[merged.size()][]);
+    }
+
+    public static void main(String[] args) {
+        int[][] result = new MergeIntervals().merge(new int[][]{{1, 2}, {3, 4}, {9, 10}, {7, 8}});
+        System.out.println(Arrays.deepToString(result));
+
+        result = new MergeIntervals().merge(new int[][]{{5, 6}, {1, 2}, {3, 4}, {8, 9}, {10, 18}});
+        System.out.println(Arrays.deepToString(result));
     }
 }
 //Time: O(N log N)

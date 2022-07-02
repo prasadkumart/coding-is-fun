@@ -1,10 +1,8 @@
 //https://leetcode.com/problems/word-search/
 
-import java.util.PriorityQueue;
 import java.util.Stack;
 
 public class MinStack {
-
     Stack<Integer> stack = new Stack<>();
     Stack<Integer> minStack = new Stack<>();
 

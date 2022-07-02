@@ -2,7 +2,6 @@ import java.util.Stack;
 
 //https://leetcode.com/problems/roman-to-integer/submissions/
 public class ValidParanthesis {
-
     public static void main(String[] args) {
         System.out.println(new ValidParanthesis().isValid("()"));
         System.out.println(new ValidParanthesis().isValid("{{}[][[[]]]}"));
@@ -19,7 +18,7 @@ public class ValidParanthesis {
                 case '}' :
                     if (stack.isEmpty() || stack.pop() != '{') return false;
                     break;
-                case ']' :
+                case ']':
                     if (stack.isEmpty() || stack.pop() != '[') return false;
                     break;
                 default:

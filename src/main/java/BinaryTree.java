@@ -4,61 +4,6 @@ import java.util.Stack;
 public class BinaryTree {
     public static int longestPath = 0;
 
-    public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
-        tree.root = new TreeNode(1);
-        tree.root.left = new TreeNode(2);
-        tree.root.right = new TreeNode(3);
-        tree.root.left.left = new TreeNode(4);
-        tree.root.left.right = new TreeNode(5);
-
-        //Depth First Traversals:
-        System.out.println("\nInorder traversal of binary tree is ");
-        //Left, Root, Right
-        tree.printInorder();
-
-        System.out.println("Preorder traversal of binary tree is ");
-        //Root, Left, Right
-        tree.printPreorder();
-
-        System.out.println("\nPostorder traversal of binary tree is ");
-        //Left, Right, Root
-        tree.printPostorder();
-
-        //Level Order Binary Tree Traversal (Breadth First Binary Tree)
-        System.out.println("Level order traversal of binary tree is ");
-        tree.printLevelOrder();
-
-
-        //tree comparison
-        BinaryTree p = new BinaryTree();
-        p.root = new TreeNode(2);
-        p.root.left = new TreeNode(1);
-        p.root.right = new TreeNode(3);
-
-        BinaryTree q = new BinaryTree();
-        q.root = new TreeNode(2);
-        //q.root.left = new TreeNode(1);
-        q.root.right = new TreeNode(3);
-
-        System.out.println("SameTree: " + isSameTree(p.root, q.root));
-        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
-
-        System.out.println("isValidBST " + isValidBST(p.root));
-
-        System.out.println("isValidBST " + isValidBST(new TreeNode(-2147483648)));
-
-
-        q = new BinaryTree();
-        q.root = new TreeNode(3);
-        q.root.left = new TreeNode(9);
-        q.root.right = new TreeNode(20);
-        q.root.right.left = new TreeNode(15);
-        q.root.right.right = new TreeNode(7);
-        System.out.println("depth of the tree " + maxDepth(q.root));
-        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
-    }
-
     //https://leetcode.com/problems/maximum-depth-of-binary-tree/
     public static int maxDepth(TreeNode root) {
         if (null == root) {
@@ -165,11 +110,66 @@ public class BinaryTree {
     public static boolean isSameTree(TreeNode p, TreeNode q) {
         if (null == p && null == q) {
             return true;
-        } else if ((null== p || null==q) || (p.val != q.val)) {
+        } else if ((null == p || null == q) || (p.val != q.val)) {
             return false;
         } else {
             return (isSameTree(p.left, q.left) && isSameTree(p.right, q.right));
         }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(3);
+        tree.root.left.left = new TreeNode(4);
+        tree.root.left.right = new TreeNode(5);
+
+        //Depth First Traversals:
+        System.out.println("\nInorder traversal of binary tree is ");
+        //Left, Root, Right
+        tree.printInorder();
+
+        System.out.println("Preorder traversal of binary tree is ");
+        //Root, Left, Right
+        tree.printPreorder();
+
+        System.out.println("\nPostorder traversal of binary tree is ");
+        //Left, Right, Root
+        tree.printPostorder();
+
+        //Level Order Binary Tree Traversal (Breadth First Binary Tree)
+        System.out.println("Level order traversal of binary tree is ");
+        tree.printLevelOrder();
+
+
+        //tree comparison
+        BinaryTree p = new BinaryTree();
+        p.root = new TreeNode(2);
+        p.root.left = new TreeNode(1);
+        p.root.right = new TreeNode(3);
+
+        BinaryTree q = new BinaryTree();
+        q.root = new TreeNode(2);
+        //q.root.left = new TreeNode(1);
+        q.root.right = new TreeNode(3);
+
+        System.out.println("SameTree: " + isSameTree(p.root, q.root));
+        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
+
+        System.out.println("isValidBST " + isValidBST(p.root));
+
+        System.out.println("isValidBST " + isValidBST(new TreeNode(-2147483648)));
+
+
+        q = new BinaryTree();
+        q.root = new TreeNode(3);
+        q.root.left = new TreeNode(9);
+        q.root.right = new TreeNode(20);
+        q.root.right.left = new TreeNode(15);
+        q.root.right.right = new TreeNode(7);
+        System.out.println("depth of the tree " + maxDepth(q.root));
+        System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
     }
 }
 

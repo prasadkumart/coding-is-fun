@@ -1,11 +1,5 @@
 //https://leetcode.com/problems/roman-to-integer/submissions/
 public class RomanToInteger {
-
-    public static void main(String[] args) {
-        System.out.println(new RomanToInteger().romanToInt("MCMXLIV"));
-        System.out.println(new RomanToInteger().romanToInt("LXXV"));
-    }
-
     public int romanToInt(String s) {
         int sum = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -36,5 +30,10 @@ public class RomanToInteger {
             default:
                 return 0;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new RomanToInteger().romanToInt("MCMXLIV"));
+        System.out.println(new RomanToInteger().romanToInt("LXXV"));
     }
 }

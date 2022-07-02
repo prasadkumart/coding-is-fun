@@ -3,15 +3,6 @@ import java.util.Queue;
 
 //https://leetcode.com/problems/merge-k-sorted-lists/
 public class MergeKSortedLists {
-    public static void main(String[] args) {
-        ListNode list1 = new MergeKSortedLists().createList(new int[]{1,4,5});
-        ListNode list2 = new MergeKSortedLists().createList(new int[]{1,3,4});
-        ListNode list3 = new MergeKSortedLists().createList(new int[]{2,6});
-
-        ListNode head = new MergeKSortedLists().mergeKLists(new ListNode[]{list1,list2,list3});
-        new MergeKSortedLists().traverse(head);
-    }
-
     public ListNode mergeKLists(ListNode[] lists) {
         Queue<ListNode> minHeap = new PriorityQueue<>((a,b) -> Integer.compare(a.val, b.val));
 
@@ -65,12 +56,31 @@ public class MergeKSortedLists {
         System.out.println("\ncount " + count);
     }
 
+    public static void main(String[] args) {
+        ListNode list1 = new MergeKSortedLists().createList(new int[]{1, 4, 5});
+        ListNode list2 = new MergeKSortedLists().createList(new int[]{1, 3, 4});
+        ListNode list3 = new MergeKSortedLists().createList(new int[]{2, 6});
+
+        ListNode head = new MergeKSortedLists().mergeKLists(new ListNode[]{list1, list2, list3});
+        new MergeKSortedLists().traverse(head);
+    }
+
     class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }    }
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }
 
 //    Time complexity : O(Nlogk) where \text{k}k is the number of linked lists.

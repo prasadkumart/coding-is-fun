@@ -1,15 +1,5 @@
 //https://leetcode.com/problems/lru-cache/
 public class RotateListToLeft {
-    public static void main(String[] args) {
-        ListNode head = new RotateListToLeft().createList(new int[]{1, 2, 3, 4, 5});
-        new RotateListToLeft().traverse(head);
-        //head = new RotateList().rotateRight(head,1);
-        //new RotateList().traverse(head);
-
-        head = new RotateListToLeft().rotateRight(head, 2);
-        new RotateListToLeft().traverse(head);
-    }
-
     public ListNode rotateRight(ListNode head, int k) {
         if (null == head || null == head.next || k == 0) {
             return head;
@@ -94,10 +84,30 @@ public class RotateListToLeft {
         System.out.println("\ncount " + count);
     }
 
+    public static void main(String[] args) {
+        ListNode head = new RotateListToLeft().createList(new int[]{1, 2, 3, 4, 5});
+        new RotateListToLeft().traverse(head);
+        //head = new RotateList().rotateRight(head,1);
+        //new RotateList().traverse(head);
+
+        head = new RotateListToLeft().rotateRight(head, 2);
+        new RotateListToLeft().traverse(head);
+    }
+
     class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }    }
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
 }

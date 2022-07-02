@@ -3,13 +3,6 @@ import java.util.Arrays;
 //https://leetcode.com/problems/reorganize-string/
 //O(N ^ 2)
 public class Minesweeper {
-
-    public static void main(String[] args) {
-        char[][] board = {{'E', 'E', 'E', 'E', 'E'}, {'E', 'E', 'M', 'E', 'E'}, {'E', 'E', 'E', 'E', 'E'}, {'E', 'E', 'E', 'E', 'E'}};
-        int[] click = {3, 0};
-        System.out.println(Arrays.deepToString(new Minesweeper().updateBoard(board, click)));
-    }
-
     public char[][] updateBoard(char[][] board, int[] click) {
         int[][] dirs = {{0, 1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}, {1, -1}, {1, 0}, {1, 1}};
 
@@ -55,5 +48,12 @@ public class Minesweeper {
         }
 
         return board;
+    }
+
+
+    public static void main(String[] args) {
+        char[][] board = {{'E', 'E', 'E', 'E', 'E'}, {'E', 'E', 'M', 'E', 'E'}, {'E', 'E', 'E', 'E', 'E'}, {'E', 'E', 'E', 'E', 'E'}};
+        int[] click = {3, 0};
+        System.out.println(Arrays.deepToString(new Minesweeper().updateBoard(board, click)));
     }
 }

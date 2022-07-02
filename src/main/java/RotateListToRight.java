@@ -1,17 +1,5 @@
 //https://leetcode.com/problems/lru-cache/
 public class RotateListToRight {
-    public static void main(String[] args) {
-        ListNode head = new RotateListToRight().createList(new int[]{1, 2, 3, 4, 5});
-        //ListNode head = new RotateListToLeft().createList(new int[]{0,1,2});
-        new RotateListToRight().traverse(head);
-        //head = new RotateList().rotateRight(head,1);
-        //new RotateList().traverse(head);
-
-        //head = new RotateListToLeft().rotateRight(head,1);
-        head = new RotateListToRight().rotateRight(head, 1);
-        new RotateListToRight().traverse(head);
-    }
-
     public ListNode rotateRight(ListNode head, int k) {
         if (null == head || null == head.next || k == 0) {
             return head;
@@ -95,7 +83,29 @@ public class RotateListToRight {
     class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }    }
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public static void main(String[] args) {
+        ListNode head = new RotateListToRight().createList(new int[]{1, 2, 3, 4, 5});
+        //ListNode head = new RotateListToLeft().createList(new int[]{0,1,2});
+        new RotateListToRight().traverse(head);
+        //head = new RotateList().rotateRight(head,1);
+        //new RotateList().traverse(head);
+
+        //head = new RotateListToLeft().rotateRight(head,1);
+        head = new RotateListToRight().rotateRight(head, 1);
+        new RotateListToRight().traverse(head);
+    }
 }

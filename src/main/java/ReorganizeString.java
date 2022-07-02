@@ -4,13 +4,6 @@ import java.util.PriorityQueue;
 
 //https://leetcode.com/problems/reorganize-string/
 public class ReorganizeString {
-
-    public static void main(String[] args) {
-        System.out.println(new ReorganizeString().reorganizeString("aab"));
-        System.out.println(new ReorganizeString().reorganizeString("aaab"));
-        System.out.println(new ReorganizeString().reorganizeString("abcd"));
-    }
-
     //O(N lon N)
     public String reorganizeString(String s) {
         StringBuilder result = new StringBuilder();
@@ -56,5 +49,12 @@ public class ReorganizeString {
         }
 
         return result.toString();
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(new ReorganizeString().reorganizeString("aab"));
+        System.out.println(new ReorganizeString().reorganizeString("aaab"));
+        System.out.println(new ReorganizeString().reorganizeString("abcd"));
     }
 }

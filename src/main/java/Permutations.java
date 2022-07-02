@@ -4,11 +4,6 @@ import java.util.List;
 //https://leetcode.com/problems/permutations/
 //O(N!) T
 public class Permutations {
-    public static void main(String[] args) {
-        System.out.println(new Permutations().permute(new int[]{1, 2, 3}));
-        System.out.println(new Permutations().permute(new int[]{1}));
-    }
-
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         boolean[] visited = new boolean[nums.length];
@@ -32,5 +27,10 @@ public class Permutations {
             visited[i] = false;
             list.remove(list.size() - 1);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Permutations().permute(new int[]{1, 2, 3}));
+        System.out.println(new Permutations().permute(new int[]{1}));
     }
 }

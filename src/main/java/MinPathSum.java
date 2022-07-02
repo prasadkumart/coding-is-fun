@@ -1,12 +1,5 @@
 //https://leetcode.com/problems/roman-to-integer/submissions/
 public class MinPathSum {
-
-    public static void main(String[] args) {
-        System.out.println(new MinPathSum().minPathSum(new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}));
-        System.out.println(new MinPathSum().minPathSum(new int[][]{{1, 2, 3}, {4, 5, 6}}));
-
-    }
-
     public int minPathSum(int[][] grid) {
         if (null == grid || grid.length == 0)
             return 0;
@@ -45,5 +38,11 @@ public class MinPathSum {
         }
 
         return grid[rows - 1][cols - 1];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new MinPathSum().minPathSum(new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}));
+        System.out.println(new MinPathSum().minPathSum(new int[][]{{1, 2, 3}, {4, 5, 6}}));
+
     }
 }

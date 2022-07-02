@@ -1,15 +1,5 @@
 //https://leetcode.com/problems/longest-palindromic-substring/solution/
 public class IntegerToEnglishWords {
-
-    public static void main(String[] args) {
-        System.out.println(new IntegerToEnglishWords().numberToWords(123));
-        System.out.println(new IntegerToEnglishWords().numberToWords(919));
-        System.out.println(new IntegerToEnglishWords().numberToWords(17));
-        System.out.println(new IntegerToEnglishWords().numberToWords(4));
-        System.out.println(new IntegerToEnglishWords().numberToWords(1234567));
-        //System.out.println(new LongestPalindromeSubstr().longestPalindrome("cbbd"));
-    }
-
     public String numberToWords(int num) {
         if (num < 0) return "";
         if (num == 0) return "Zero";
@@ -69,5 +59,14 @@ public class IntegerToEnglishWords {
             num = 0;
         }
         return result.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new IntegerToEnglishWords().numberToWords(123));
+        System.out.println(new IntegerToEnglishWords().numberToWords(919));
+        System.out.println(new IntegerToEnglishWords().numberToWords(17));
+        System.out.println(new IntegerToEnglishWords().numberToWords(4));
+        System.out.println(new IntegerToEnglishWords().numberToWords(1234567));
+        //System.out.println(new LongestPalindromeSubstr().longestPalindrome("cbbd"));
     }
 }
