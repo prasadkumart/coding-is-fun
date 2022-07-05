@@ -1,8 +1,108 @@
-import java.util.Stack;
+import com.sun.source.tree.Tree;
+
+import java.util.*;
 
 //https://leetcode.com/problems/same-tree/solution/
 public class BinaryTree {
     public static int longestPath = 0;
+
+    //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+    public static TreeNode connect(TreeNode root) {
+        if (null == root) {
+            return null;
+        }
+
+        TreeNode leftNode = root;
+        while (leftNode.left != null) {
+            TreeNode head = leftNode;
+            while (head != null) {
+                head.left.next = head.right;
+                if (head.next != null) {
+                    head.right.next = head.next.left;
+                }
+                head = head.next;
+            }
+            leftNode = leftNode.left;
+        }
+        return root;
+    }
+
+    //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+    public static TreeNode sortedArrayToBST(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+
+        return constructBSTRecursive(nums, 0, nums.length-1);
+    }
+
+    private static TreeNode constructBSTRecursive(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+        //int mid = left + (right - left) / 2;
+        int mid = (left + right)/ 2;
+        TreeNode current = new TreeNode(nums[mid]);
+        current.left = constructBSTRecursive(nums, left, mid - 1);
+        current.right = constructBSTRecursive(nums, mid + 1, right);
+        return current;
+    }
+
+    //https://leetcode.com/problems/binary-tree-level-order-traversal/
+    //O(N) TS
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (null == root) {
+            return result;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> currLevelValues = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode currNode = queue.remove();
+                currLevelValues.add(currNode.val);
+
+                if (currNode.left != null) {
+                    queue.add(currNode.left);
+                }
+                if (currNode.right != null) {
+                    queue.add(currNode.right);
+                }
+            }
+
+            result.add(currLevelValues);
+        }
+
+        return result;
+    }
+
+
+    //https://leetcode.com/problems/symmetric-tree/
+    //O(N)
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        return isSymmetric(root.left, root.right);
+    }
+
+    private static boolean isSymmetric(TreeNode left, TreeNode right) {
+        if (left == null || right == null) {
+            return left == right;
+        }
+
+        if (left.val != right.val) {
+            return false;
+        }
+
+        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
 
     //https://leetcode.com/problems/maximum-depth-of-binary-tree/
     public static int maxDepth(TreeNode root) {
@@ -170,6 +270,38 @@ public class BinaryTree {
         q.root.right.right = new TreeNode(7);
         System.out.println("depth of the tree " + maxDepth(q.root));
         System.out.println("diameterOfBinaryTree " + diameterOfBinaryTree(q.root));
+
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(2);
+        tree.root.left.left = new TreeNode(3);
+        tree.root.left.right = new TreeNode(4);
+        tree.root.right.left = new TreeNode(4);
+        tree.root.right.right = new TreeNode(3);
+        System.out.println("isSymmetric: " + isSymmetric(tree.root));
+        System.out.println("levelOrder Traversal: " + levelOrder(tree.root));
+
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(2);
+        tree.root.left.right = new TreeNode(4);
+        tree.root.right.right = new TreeNode(4);
+        System.out.println("isSymmetric: " + isSymmetric(tree.root));
+
+        System.out.println("levelOrder Traversal: " + levelOrder(tree.root));
+
+        tree.root = sortedArrayToBST(new int[]{-10, -5, -3, 0, 5, 8, 9});
+        tree.printInorder();
+
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(3);
+        tree.root.left.left = new TreeNode(4);
+        tree.root.left.right = new TreeNode(5);
+        tree.root.right.left = new TreeNode(6);
+        tree.root.right.right = new TreeNode(7);
+        tree.root = connect(tree.root);
+        System.out.println("levelOrder Traversal: " + levelOrder(tree.root));
     }
 }
 
@@ -178,6 +310,8 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
+
+    TreeNode next;
 
     TreeNode() {
     }
