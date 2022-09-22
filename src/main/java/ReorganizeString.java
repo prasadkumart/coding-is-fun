@@ -3,8 +3,10 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 //https://leetcode.com/problems/reorganize-string/
+//https://www.youtube.com/watch?v=zaM_GLLvysw&ab_channel=KevinNaughtonJr.
+//O(N lonN) T
+//O(N) S
 public class ReorganizeString {
-    //O(N lon N)
     public String reorganizeString(String s) {
         StringBuilder result = new StringBuilder();
 

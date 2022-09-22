@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-//https://leetcode.com/problems/reorganize-string/
+//https://leetcode.com/problems/minesweeper/
 //O(N ^ 2)
 public class Minesweeper {
     public char[][] updateBoard(char[][] board, int[] click) {

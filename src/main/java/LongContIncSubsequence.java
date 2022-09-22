@@ -1,4 +1,6 @@
 //https://leetcode.com/problems/longest-continuous-increasing-subsequence/
+//O(N) T
+//O(1) S
 public class LongContIncSubsequence {
     public static int findLengthOfLCIS(int[] nums) {
         if (null == nums || nums.length == 0) {

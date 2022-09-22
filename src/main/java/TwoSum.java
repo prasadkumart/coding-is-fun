@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+//https://leetcode.com/problems/two-sum/
 public class TwoSum {
     public static int[] twoNumberSum(int[] array, int targetSum) {
         if (null == array || array.length == 0) return new int[]{};

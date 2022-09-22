@@ -2,11 +2,13 @@
 public class RomanToInteger {
     public int romanToInt(String s) {
         int sum = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (i + 1 < s.length() && getValueForChar(s.charAt(i)) < getValueForChar(s.charAt(i + 1)))
-                sum = sum - getValueForChar(s.charAt(i));
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            int currVal = getValueForChar(s.charAt(i));
+            if (i + 1 < len && currVal < getValueForChar(s.charAt(i + 1)))
+                sum -= currVal;
             else
-                sum = sum + getValueForChar(s.charAt(i));
+                sum += currVal;
         }
         return sum;
     }

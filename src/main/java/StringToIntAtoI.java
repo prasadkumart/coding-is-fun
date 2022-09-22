@@ -1,4 +1,4 @@
-//https://leetcode.com/problems/longest-palindromic-substring/solution/
+//https://leetcode.com/problems/string-to-integer-atoi/
 public class StringToIntAtoI {
     public int myAtoi(String s) {
         if (null == s || s.isEmpty()) {

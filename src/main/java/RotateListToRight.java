@@ -105,7 +105,7 @@ public class RotateListToRight {
         //new RotateList().traverse(head);
 
         //head = new RotateListToLeft().rotateRight(head,1);
-        head = new RotateListToRight().rotateRight(head, 1);
+        head = new RotateListToRight().rotateRight(head, 8);
         new RotateListToRight().traverse(head);
     }
 }

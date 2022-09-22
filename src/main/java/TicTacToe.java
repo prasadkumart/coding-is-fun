@@ -2,6 +2,7 @@
 //O(m.n)TS
 public class TicTacToe {
     int n;
+    //
     int[] rows;
     int[] cols;
     int diagonal;

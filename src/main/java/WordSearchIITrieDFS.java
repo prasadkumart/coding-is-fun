@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//https://leetcode.com/problems/word-search/
+//https://leetcode.com/problems/word-search-ii/
+//O(M*N*4 * 3^(L - 1) T, because we only need to search 3 directions after first search.
+//O(N) S
 public class WordSearchIITrieDFS {
 
     public List<String> findWords(char[][] board, String[] words) {

@@ -9,10 +9,9 @@ public class LongestPalindromeSubstr {
             return s;
         }
 
-        int start=0, end=0;
         for (int i=0; i<slen; i++) {
             expandAroundCenter(s, i, i);
-            expandAroundCenter(s, i, i+1);
+            expandAroundCenter(s, i, i+1); //to cover when a string has even no no chars
         }
         return s.substring(resultStart, resultStart+resultLength);
     }

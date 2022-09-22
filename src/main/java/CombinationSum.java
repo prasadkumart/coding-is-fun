@@ -1,6 +1,9 @@
 import java.util.*;
 
 //https://leetcode.com/problems/combination-sum/
+//backtracking algo
+//https://www.youtube.com/watch?v=vftmHwRVQW4&ab_channel=XavierElon
+//O(N^Target)
 public class CombinationSum {
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         if (null == candidates) {

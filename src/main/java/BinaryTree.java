@@ -1,20 +1,25 @@
 import com.sun.source.tree.Tree;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //https://leetcode.com/problems/same-tree/solution/
 public class BinaryTree {
     public static int longestPath = 0;
 
     //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+    //O(n) T
+    //O(1) S
     public static TreeNode connect(TreeNode root) {
         if (null == root) {
             return null;
         }
 
         TreeNode leftNode = root;
+        //DFS
         while (leftNode.left != null) {
             TreeNode head = leftNode;
+            //BFS
             while (head != null) {
                 head.left.next = head.right;
                 if (head.next != null) {
@@ -28,19 +33,22 @@ public class BinaryTree {
     }
 
     //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+    //O(N) TS
     public static TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length == 0) {
             return null;
         }
 
-        return constructBSTRecursive(nums, 0, nums.length-1);
+        TreeNode root = constructBSTRecursive(nums, 0, nums.length-1);
+
+        return root;
     }
 
     private static TreeNode constructBSTRecursive(int[] nums, int left, int right) {
         if (left > right) {
             return null;
         }
-        //int mid = left + (right - left) / 2;
+        //int mid = left + (right - left) / 2; // to avoid integer overflow
         int mid = (left + right)/ 2;
         TreeNode current = new TreeNode(nums[mid]);
         current.left = constructBSTRecursive(nums, left, mid - 1);
@@ -49,6 +57,7 @@ public class BinaryTree {
     }
 
     //https://leetcode.com/problems/binary-tree-level-order-traversal/
+    //https://www.youtube.com/watch?v=XZnWETlZZ14&ab_channel=KevinNaughtonJr.
     //O(N) TS
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
@@ -83,7 +92,7 @@ public class BinaryTree {
 
 
     //https://leetcode.com/problems/symmetric-tree/
-    //O(N)
+    //O(N) TS
     public static boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
@@ -105,6 +114,7 @@ public class BinaryTree {
     }
 
     //https://leetcode.com/problems/maximum-depth-of-binary-tree/
+    //O(N) TS
     public static int maxDepth(TreeNode root) {
         if (null == root) {
             return 0;
@@ -137,9 +147,16 @@ public class BinaryTree {
     }
 
     //https://leetcode.com/problems/validate-binary-search-tree/
+    //https://www.youtube.com/watch?v=Z_-h_mpDmeg&t=410s&ab_channel=KevinNaughtonJr.
+    //https://www.youtube.com/watch?v=kR5AxWHa9nc&ab_channel=FisherCoder
+    //O(N) TS as visiting every node
     public static boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return validDFS(root, null, null);
         //had to use Double.MAX_VALUE to accommodate (-2147483648 : Integer.MIN_VALUE)
-        double leftNodeVal = -Double.MAX_VALUE;
+        /*double leftNodeVal = -Double.MAX_VALUE;
         Stack<TreeNode> stack = new Stack<>();
         while (!stack.isEmpty() || null != root) {
 
@@ -156,6 +173,97 @@ public class BinaryTree {
         }
 
         return true;
+         */
+    }
+
+    private static boolean validDFS(TreeNode root, Integer min, Integer max) {
+        //we are paste the validation of all nodes
+        if (root == null) {
+            return true;
+        } else {
+            if ((min != null && root.val <= min) || (max != null && root.val >= max)) {
+                return false;
+            }
+        }
+
+        return validDFS(root.left, min, root.val) && validDFS(root.right, root.val, max);
+    }
+
+    //https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+    //https://www.youtube.com/watch?v=mvQj-L0wEx0&t=3s&ab_channel=KnowledgeCenter
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> results = new ArrayList<>();
+
+        if (null == root) return results;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean flag = true;
+        while(!queue.isEmpty()) {
+            List<Integer> currLevalVals = new ArrayList<>();
+            int size = queue.size();
+            for (int i= 0; i<size; i++) {
+                TreeNode currNode = queue.remove();
+                currLevalVals.add(currNode.val);
+                if (currNode.left != null) {
+                    queue.add(currNode.left);
+                }
+                if (currNode.right != null) {
+                    queue.add(currNode.right);
+                }
+            }
+
+            if (!flag) {
+                Collections.reverse(currLevalVals);
+            }
+
+            results.add(currLevalVals);
+        }
+
+        return results;
+    }
+
+    public List<List<Integer>> zigzagLevelOrderDQ(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.offerFirst(root);
+
+        boolean reverse = false;
+
+        while(!deque.isEmpty()) {
+            List<Integer> currLevelVals = new ArrayList<>();
+            int size = deque.size();
+
+            for (int i =0; i<size; i++) {
+                TreeNode currNode = reverse ? deque.pollLast() : deque.pollFirst();
+                currLevelVals.add(currNode.val);
+
+                if (reverse) {
+                    if (currNode.right != null) {
+                        deque.offerFirst(currNode.right);
+                    }
+                    if (currNode.left != null) {
+                        deque.offerFirst(currNode.left);
+                    }
+                } else {
+                    if (currNode.left != null) {
+                        deque.offerLast(currNode.left);
+                    }
+                    if (currNode.right != null) {
+                        deque.offerLast(currNode.right);
+                    }
+                }
+            }
+
+            result.add(currLevelVals);
+            reverse = !reverse;
+        }
+
+        return result;
     }
 
     //Left, Root, Right

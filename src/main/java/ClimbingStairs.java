@@ -1,4 +1,6 @@
-public class NumWays {
+//https://leetcode.com/problems/climbing-stairs/submissions/
+//https://www.youtube.com/watch?v=ZMNRb9TYiQM&ab_channel=FisherCoder
+public class ClimbingStairs {
     public static int numWaysRecursive(int n) {
         if (n==0 || n==1) {
             return 1;

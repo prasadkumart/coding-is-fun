@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 //https://leetcode.com/problems/longest-increasing-subsequence/
+//https://www.youtube.com/watch?v=S9oUiVYEq7E&ab_channel=TusharRoy-CodingMadeSimple
 public class LongIncreasingSubsequence {
     //O(N ^ 2)
     public static int lengthOfLISDP(int[] nums) {
@@ -30,9 +31,9 @@ public class LongIncreasingSubsequence {
         int len = 0; // len of sequence
 
         for (int num : nums) {
+            //if num not found in dp array, binarySearch returns -ve insertionPosition (not index)
             int idx = Arrays.binarySearch(dp, 0, len, num);
 
-            //if not found, return binarySearch return -ve insertionPosition
             if (idx < 0) {
                 idx = -(idx + 1);
             }

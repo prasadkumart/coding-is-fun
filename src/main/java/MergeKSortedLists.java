@@ -2,10 +2,14 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 //https://leetcode.com/problems/merge-k-sorted-lists/
+//https://www.youtube.com/watch?v=L-8LVBPmIpc&ab_channel=EricProgramming
+//O(Nlogk) T
+//O(N+K) S
 public class MergeKSortedLists {
     public ListNode mergeKLists(ListNode[] lists) {
         Queue<ListNode> minHeap = new PriorityQueue<>((a,b) -> Integer.compare(a.val, b.val));
 
+        //only first node is added from all lists - O(1)
         for(ListNode node: lists) {
             if (null == node) {
                 continue;
@@ -13,16 +17,17 @@ public class MergeKSortedLists {
             minHeap.add(node);
         }
 
-        ListNode head = new ListNode();
+        // new sorted list
+        ListNode head = new ListNode(); //O(n) Creating a new linked list costs O(n) space.
         ListNode temp = head;
 
-        while(!minHeap.isEmpty()) {
-            ListNode top = minHeap.poll();
+        while(!minHeap.isEmpty()) { //O(n)
+            ListNode top = minHeap.poll(); //O(1)
             temp.next = top;
             temp = temp.next;
             //add next element from the list to minHeap
             if (top.next != null) {
-                minHeap.add(top.next);
+                minHeap.add(top.next); //O(logK) - minHelp has to sort the elements after adding a new one
             }
         }
 
@@ -83,15 +88,15 @@ public class MergeKSortedLists {
     }
 }
 
-//    Time complexity : O(Nlogk) where \text{k}k is the number of linked lists.
+// Time complexity : O(Nlogk) where k is the number of linked lists.
 //
 //        The comparison cost will be reduced to O(logk) (instead O(NLogN)) for every pop and insertion to
 //        priority queue.
-//        But finding the node with the smallest value just costs O(1)O(1) time.
-//        There are NN nodes in the final linked list.
-//        Space complexity :
+//        But finding the node with the smallest value just costs O(1) time.
+//        There are N nodes in the final linked list.
+// Space complexity :
 //
-//        O(n)O(n) Creating a new linked list costs O(n)O(n) space.
-//        O(k)O(k) The code above present applies in-place method which cost O(1)O(1) space.
-//        And the priority queue (often implemented with heaps) costs O(k)O(k) space
+//        O(n) Creating a new linked list costs O(n) space.
+//        O(k) The code above present applies in-place method which cost O(1) space.
+//        And the priority queue (often implemented with heaps) costs O(k) space
 //        (it's far less than NN in most situations).

@@ -8,10 +8,10 @@ public class CourseSchedule {
         //course catalog
         List<Integer>[] catalog = new ArrayList[numCourses];
 
-        //no of PreReqs for an each course
+        //no of PreReqs for each course
         int[] preReqsArr = new int[numCourses];
 
-        //[a,b] - b is a prereq for a
+        //[a,b] - b is prereq for a
         for (int[] preReq: prerequisites) {
             int a = preReq[0];
             int b = preReq[1];
@@ -24,7 +24,7 @@ public class CourseSchedule {
 
         //available course
         ArrayDeque<Integer> availableQ = new ArrayDeque<>();
-        for (int i=0;i<numCourses;i++) {
+        for (int i=0;i<preReqsArr.length;i++) {
             if (preReqsArr[i] == 0) {
                 availableQ.addLast(i);
             }

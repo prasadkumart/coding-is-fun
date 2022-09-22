@@ -3,6 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 
 //https://leetcode.com/problems/pacific-atlantic-water-flow/
+//https://www.youtube.com/watch?v=s-VkcjHqkGI&ab_channel=NeetCode
+//https://www.youtube.com/watch?v=DvQf2swmei8&ab_channel=happygirlzt
 //O(m.n)TS
 public class PacificAtlanticWaterFlow {
     public static List<List<Integer>> pacificAtlantic(int[][] heights) {

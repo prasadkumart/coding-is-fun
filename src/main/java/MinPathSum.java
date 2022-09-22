@@ -1,4 +1,5 @@
-//https://leetcode.com/problems/roman-to-integer/submissions/
+//https://leetcode.com/problems/minimum-path-sum/
+//https://www.youtube.com/watch?v=ItjZdu6jEMs&t=460s&ab_channel=KevinNaughtonJr.
 public class MinPathSum {
     public int minPathSum(int[][] grid) {
         if (null == grid || grid.length == 0)
@@ -9,7 +10,7 @@ public class MinPathSum {
 
         //int[][] sums = new int[rows][cols];
 
-        /*//populate first row
+        //populate first row
         for(int i=1; i< cols; i++) { //N
             grid[0][i] += grid[0][i-1];
         }
@@ -23,8 +24,9 @@ public class MinPathSum {
             for (int j=1; j<cols; j++) {
                 grid[i][j] += Math.min(grid[i-1][j], grid[i][j-1]);
             }
-        }*/
+        }
 
+        /*
         for (int i = 0; i < rows; i++) { //N*M
             for (int j = 0; j < cols; j++) {
                 if (i > 0 && j > 0) {
@@ -35,7 +37,7 @@ public class MinPathSum {
                     grid[i][j] += grid[i][j - 1];
                 }
             }
-        }
+        }*/
 
         return grid[rows - 1][cols - 1];
     }

@@ -1,4 +1,5 @@
 //https://leetcode.com/problems/implement-trie-prefix-tree/
+//https://www.youtube.com/watch?v=0k79LqIaHyQ&list=PLEJXowNB4kPyi859E6qGUs7jlpQehJndl&index=2&ab_channel=TECHDOSE
 public class Trie {
     Node root;
     public Trie() {

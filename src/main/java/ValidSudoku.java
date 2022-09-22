@@ -1,9 +1,28 @@
 import java.util.HashSet;
 import java.util.Set;
 
-//https://leetcode.com/problems/valid-sudoku/submissions/
+//https://leetcode.com/problems/valid-sudoku
+//https://www.youtube.com/watch?v=Pl7mMcBm2b8&ab_channel=NickWhite
 public class ValidSudoku {
     private static boolean isValidSudoku(char[][] input) {
+        HashSet<String> visited = new HashSet<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int curVal = input[i][j];
+                if (curVal != '.') {
+                    //HashSet.add - true if this set did not already contain the specified element
+                    if (!visited.add(curVal + " found in row " + i) ||
+                            !visited.add(curVal + " found in col " + j) ||
+                            !visited.add(curVal + " found in box " + i/3 + "-" + j/3) ) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+    private static boolean isValidSudoku1(char[][] input) {
         //check each row
         for (int i = 0; i < 9; i++) {
             Set<Character> set = new HashSet<>();

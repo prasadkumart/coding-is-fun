@@ -1,5 +1,9 @@
 import java.util.PriorityQueue;
 
+//https://leetcode.com/problems/find-median-from-data-stream/
+//https://www.youtube.com/watch?v=JNKdfHmnMSg&ab_channel=EricProgramming
+//O(longN) add
+//O(1) to find
 public class MedianFinder {
     PriorityQueue<Integer> maxHeap = null;
     PriorityQueue<Integer> minHeap = null;
@@ -34,7 +38,7 @@ public class MedianFinder {
             minHeap.add(num);
         }
 
-        //reaggange heaps based on the size and values
+        //rearrange heaps based on the size and values
         balance();
     }
 
