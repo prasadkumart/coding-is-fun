@@ -3,7 +3,9 @@ import java.util.*;
 //https://leetcode.com/problems/combination-sum/
 //backtracking algo
 //https://www.youtube.com/watch?v=vftmHwRVQW4&ab_channel=XavierElon
-//O(N^Target)
+//O(N^(Target/M)) T
+//N be the number of candidates, T be the target value, and M be the minimal value among the candidates
+//Space Complexity: O(T/M)
 public class CombinationSum {
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         if (null == candidates) {
@@ -19,7 +21,9 @@ public class CombinationSum {
 
     private static void findCombinations(int[] candidates, int index, int target, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
+            //current list is a pointer, so add a copy to a new ArrayList
             result.add(new ArrayList<>(current));
+            //result.add(current);
             return;
         }
 

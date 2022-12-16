@@ -1,10 +1,27 @@
-import com.sun.source.tree.Tree;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 //https://leetcode.com/problems/same-tree/solution/
 public class BinaryTree {
+
+    static Integer kth_smallest_element(TreeNode root, Integer k) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b) -> Integer.compare(b, a));
+        //TreeSet<Integer> set = new TreeSet<>();
+        traverseTree(root, k, maxHeap);
+        return maxHeap.poll();
+    }
+
+    static void traverseTree(TreeNode root, int k, PriorityQueue<Integer> maxHeap) {
+        if (root == null) {
+            return;
+        }
+        traverseTree(root.left, k, maxHeap);
+        maxHeap.add(root.val);
+        if (maxHeap.size()>k) {
+            maxHeap.remove();
+        }
+        traverseTree(root.right, k, maxHeap);
+    }
+
     public static int longestPath = 0;
 
     //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
@@ -33,7 +50,11 @@ public class BinaryTree {
     }
 
     //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
-    //O(N) TS
+    // Time complexity: O(N) since we visit each node exactly once.
+
+    // Space complexity: O(logN).
+    //The recursion stack requires O(logN) space because the tree is height-balanced.
+    // Note that the O(N) space used to store the output does not count as auxiliary space, so it is not included in the space complexity.
     public static TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length == 0) {
             return null;
@@ -48,8 +69,8 @@ public class BinaryTree {
         if (left > right) {
             return null;
         }
-        //int mid = left + (right - left) / 2; // to avoid integer overflow
-        int mid = (left + right)/ 2;
+        int mid = left + (right - left) / 2; // to avoid integer overflow
+        //int mid = (left + right)/ 2;
         TreeNode current = new TreeNode(nums[mid]);
         current.left = constructBSTRecursive(nums, left, mid - 1);
         current.right = constructBSTRecursive(nums, mid + 1, right);
@@ -67,7 +88,7 @@ public class BinaryTree {
         }
 
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        queue.add(root); //O(N) size of the queue is no of nodes at each level
 
         while (!queue.isEmpty()) {
             List<Integer> currLevelValues = new ArrayList<>();
@@ -77,22 +98,29 @@ public class BinaryTree {
                 currLevelValues.add(currNode.val);
 
                 if (currNode.left != null) {
-                    queue.add(currNode.left);
+                    queue.add(currNode.left); //O(1)
                 }
                 if (currNode.right != null) {
-                    queue.add(currNode.right);
+                    queue.add(currNode.right); //O(1)
                 }
             }
 
-            result.add(currLevelValues);
+            result.add(currLevelValues); //O(N) - results should accommodate all the nodes
         }
 
+        Collections.reverse(result);
         return result;
     }
 
 
     //https://leetcode.com/problems/symmetric-tree/
     //O(N) TS
+    /*
+    Asymptotic complexity in terms of the number of nodes ( = `n`) and the height ( = `h`) of the tree rooted at `root`:
+    * Time: O(n).
+    * Auxiliary space: O(h).
+    * Total space: O(n).
+    */
     public static boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
@@ -102,19 +130,69 @@ public class BinaryTree {
     }
 
     private static boolean isSymmetric(TreeNode left, TreeNode right) {
-        if (left == null || right == null) {
-            return left == right;
+        // returns true, iff both left and right are null
+        if (left == null && right == null) {
+            return true;
         }
 
-        if (left.val != right.val) {
+        if (left == null || right == null) {
             return false;
         }
 
-        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+        if (left.val == right.val) {
+            return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+        }
+        return false;
+    }
+
+    //TC: O(n) visits all nodes
+    //Aux space: when all nodes have a same value, and its pathologicl tree (only left child) O(n)
+    //SC: O(n)
+    static int count = 0;
+    static Integer find_single_value_trees(TreeNode root) {
+
+        Map<Integer, Integer> countMap = new HashMap<>();
+        //left->root->right
+        univalCount(root);
+        return count;
+    }
+
+    static boolean univalCount(TreeNode root) {
+        //reached leaf node
+        if (null == root) {
+            return true;
+        }
+
+        //recursively count left and right
+        boolean left = univalCount(root.left);
+        boolean right = univalCount(root.right);
+
+        //if either of subtrees are not singly,
+        //then this cant be singly
+        if (!left || !right) {
+            return false;
+        }
+
+        //if left subtree is singly and non-empty,
+        // but data doesn't match
+        if ((root.left != null && root.val != root.left.val)
+                || (root.right != null && root.val != root.right.val)) {
+            return false;
+        }
+
+        //otherwise,
+        count++;
+        return true;
     }
 
     //https://leetcode.com/problems/maximum-depth-of-binary-tree/
     //O(N) TS
+    /*
+    Asymptotic complexity in terms of the number of nodes `n`.
+    * Time: O(n).
+    * Auxiliary space: O(n).
+    * Total space: O(n).
+    */
     public static int maxDepth(TreeNode root) {
         if (null == root) {
             return 0;
@@ -325,13 +403,82 @@ public class BinaryTree {
         }
     }
 
+    //https://leetcode.com/problems/path-sum/description/
+    //TS: O(N) TS // worst case is the longest path li...
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (null == root) {
+            return false;
+        }
+        return dfs(root, targetSum);
+    }
+
+    boolean dfs(TreeNode node, int targetSum) {
+        if (targetSum-node.val == 0 && node.left == null && node.right == null) {
+            return true;
+        }
+
+        targetSum -= node.val;
+        boolean leftFlag = false;
+        boolean rightFlag = false;
+        if (node.left != null) {
+            leftFlag = dfs(node.left, targetSum);
+        }
+        if (leftFlag) {
+            return true;
+        }
+
+        if (node.right != null) {
+            rightFlag = dfs(node.right, targetSum);
+        }
+        if (rightFlag) {
+            return true;
+        }
+
+        return false;
+    }
+
+    //https://leetcode.com/problems/path-sum-ii/
+    public List<List<Integer>> pathSumII(TreeNode root, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (null == root) {
+            return result;
+        }
+        dfsPathSumII(root, targetSum, new ArrayList<>(), result);
+        return result;
+    }
+
+    void dfsPathSumII(TreeNode node, int targetSum, List<Integer> slate, List<List<Integer>> result) {
+        slate.add(node.val);
+        targetSum -= node.val;
+
+        if (targetSum == 0 && node.left == null && node.right == null) {
+            result.add(new ArrayList<>(slate));
+        }
+
+        if (node.left != null) {
+            dfsPathSumII(node.left, targetSum, slate, result);
+        }
+        if (node.right != null) {
+            dfsPathSumII(node.right, targetSum, slate, result);
+        }
+
+        slate.remove(slate.size()-1);
+    }
+
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         tree.root = new TreeNode(1);
         tree.root.left = new TreeNode(2);
         tree.root.right = new TreeNode(3);
         tree.root.left.left = new TreeNode(4);
-        tree.root.left.right = new TreeNode(5);
+        tree.root.left.right = new TreeNode(2);
+
+        System.out.println("3rd smallest " + kth_smallest_element(tree.root, 3));
+
+        //tree.root.left.right = new TreeNode(2);
+
+        System.out.println("\nInorder traversal of binary tree is ");
+        System.out.println("Unival count: " + find_single_value_trees(tree.root));
 
         //Depth First Traversals:
         System.out.println("\nInorder traversal of binary tree is ");
@@ -410,6 +557,19 @@ public class BinaryTree {
         tree.root.right.right = new TreeNode(7);
         tree.root = connect(tree.root);
         System.out.println("levelOrder Traversal: " + levelOrder(tree.root));
+
+        tree.root = new TreeNode(5);
+        tree.root.left = new TreeNode(4);
+        tree.root.right = new TreeNode(8);
+        tree.root.left.left = new TreeNode(11);
+        tree.root.right.left = new TreeNode(13);
+        tree.root.right.right = new TreeNode(4);
+        tree.root.left.left.left = new TreeNode(7);
+        tree.root.left.left.right = new TreeNode(2);
+        tree.root.right.right.right = new TreeNode(1);
+        //tree.root = connect(tree.root);
+        System.out.println("PathSum: " + new BinaryTree().hasPathSum(tree.root, 22));
+        System.out.println("PathSumII: " + new BinaryTree().pathSumII(tree.root, 22));
     }
 }
 

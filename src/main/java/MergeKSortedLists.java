@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -6,15 +7,44 @@ import java.util.Queue;
 //O(Nlogk) T
 //O(N+K) S
 public class MergeKSortedLists {
+    public LinkedListNode init(Integer val) {
+        return new LinkedListNode(val);
+    }
+
+    static LinkedListNode merge_k_lists(ArrayList<LinkedListNode> lists) {
+        PriorityQueue<LinkedListNode> minHeap = new PriorityQueue<>((a,b) -> Integer.compare(a.value, b.value));
+
+        for(int i=0; i<lists.size(); i++) {
+            LinkedListNode listNode = lists.get(i);
+            if (listNode != null) {
+                minHeap.add(listNode); //O(logN)
+            }
+        }
+
+        LinkedListNode head = new LinkedListNode(null);
+        LinkedListNode current = head;
+        while (!minHeap.isEmpty()) {
+            LinkedListNode topNode = minHeap.poll(); //O(1)
+            current.next = topNode;
+            current = topNode;
+
+            if (topNode.next != null) {
+                minHeap.add(topNode.next); //O(lon n)
+            }
+        }
+
+        // Write your code here.
+        return head.next;
+    }
+
     public ListNode mergeKLists(ListNode[] lists) {
         Queue<ListNode> minHeap = new PriorityQueue<>((a,b) -> Integer.compare(a.val, b.val));
 
         //only first node is added from all lists - O(1)
         for(ListNode node: lists) {
-            if (null == node) {
-                continue;
+            if (node != null) {
+                minHeap.add(node);
             }
-            minHeap.add(node);
         }
 
         // new sorted list
@@ -85,6 +115,16 @@ public class MergeKSortedLists {
             this.val = val;
             this.next = next;
         }
+    }
+}
+
+class LinkedListNode {
+    Integer value;
+    LinkedListNode next;
+
+    LinkedListNode(Integer value) {
+        this.value = value;
+        this.next = null;
     }
 }
 

@@ -1,5 +1,17 @@
+import java.util.ArrayList;
+
 //https://leetcode.com/problems/combination-sum/
 public class Fibonacci {
+
+    static Integer find_fibonacci(Integer n) {
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+        return find_fibonacci(n-1) + find_fibonacci(n-2);
+    }
+
     //O(2^n)
     public static int fibRec(int n) {
         int result;
@@ -57,5 +69,7 @@ public class Fibonacci {
         for (int i = 1; i < 10; i++)
             System.out.print(fibBottomUp(i) + " ");
 
+
+        System.out.println("--->"+find_fibonacci(4));
     }
 }

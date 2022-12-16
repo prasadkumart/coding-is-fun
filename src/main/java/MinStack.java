@@ -33,12 +33,16 @@ public class MinStack {
      */
 
     private Node head;
+    public MinStack() {
+        head = null;
+    }
 
-    public void push(int x) {
-        if (head == null)
-            head = new Node(x, x, null);
-        else
-            head = new Node(x, Math.min(x, head.min), head);
+    public void push(int val) {
+        if (head == null) {
+            head = new Node(val, val, null);
+        } else {
+            head = new Node(val, Math.min(val, head.minVal), head);
+        }
     }
 
     public void pop() {
@@ -50,17 +54,16 @@ public class MinStack {
     }
 
     public int getMin() {
-        return head.min;
+        return head.minVal;
     }
 
-    private class Node {
+    class Node {
         int val;
-        int min;
+        int minVal;
         Node next;
-
-        private Node(int val, int min, Node next) {
+        Node(int val, int minVal, Node next) {
             this.val = val;
-            this.min = min;
+            this.minVal = minVal;
             this.next = next;
         }
     }

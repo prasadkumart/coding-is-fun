@@ -10,9 +10,11 @@ public class Conversion {
         list.add("second");
         list.add("third");
 
-        String[] arr = new String[list.size()];
-        list.toArray(arr);
-        Arrays.stream(arr).forEach(x -> System.out.println(x));
+        //list to array
+        String[] arr = list.toArray(String[]::new);
+        //String[] arr = list.toArray(new String[list.size()]);
+        //Arrays.stream(arr).forEach(x -> System.out.println(x));
+        Arrays.stream(arr).forEach(System.out::println);
 
         //using java8
         List<String> list1 = Arrays.asList("apple","banana", "kiwi");

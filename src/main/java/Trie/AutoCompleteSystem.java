@@ -1,9 +1,12 @@
+package Trie;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 //642 - Design Search Autocomplete System.java
 //https://www.youtube.com/watch?v=Zm3-cGKKFLg&ab_channel=happygirlzt
+//https://leetcode.com/problems/design-search-autocomplete-system/
 public class AutoCompleteSystem {
 
     class TrieNode implements Comparable<TrieNode> {
@@ -43,12 +46,13 @@ public class AutoCompleteSystem {
     StringBuilder sb = new StringBuilder();
     public AutoCompleteSystem(String[] sentences, int[] times) {
         root = new TrieNode();
-        
+        curr = root;
         for (int i=0; i<sentences.length; i++) {
             add(sentences[i],times[i]);
         }
     }
 
+    //O(M) TS - M IS the length of the word
     public void add(String sentence, int time) {
         TrieNode curr = root;
         List<TrieNode> visitedNodes = new ArrayList<>();
@@ -71,11 +75,15 @@ public class AutoCompleteSystem {
         }
     }
 
+    //O(M) - T : M IS the length of the word
+    // O(1) S
     public List<String> input(char c) {
         List<String> result = new ArrayList<>();
         //add sentence to
         if (c == '#') {
             add(sb.toString(),1);
+
+            //re-pointing curr node to root from a leaf of newly created word
             curr = root;
 
             //reset string builder
@@ -118,5 +126,16 @@ public class AutoCompleteSystem {
 
         result = obj.input('a');
         System.out.println("Input 'a' : " + result);
+
+        result = obj.input('#');
+        System.out.println("Input '#' : " + result);
+
+        result = obj.input('i');
+        System.out.println("Input 'i' : " + result);
+
+        //["AutocompleteSystem","input","input","input","input","input","input","input","input","input","input","input","input"]
+        //[[["i love you","island","iroman","i love leetcode"],[5,3,2,2]],["i"],[" "],["a"],["#"],["i"],[" "],["a"],["#"],["i"],[" "],["a"],["#"]]
+
+        //[null,["i love you","island","i love leetcode"],["i love you","i love leetcode"],[],[],["i love you","island","i love leetcode"],["i love you","i love leetcode","i a"],["i a"],[],["i love you","island","i a"],["i love you","i a","i love leetcode"],["i a"],[]]
     }
 }

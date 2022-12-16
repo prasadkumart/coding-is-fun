@@ -49,12 +49,12 @@ public class IntegerToEnglishWords {
             if (num < 20) {
                 result.append(LESS_THAN_TWENTY[num]);
             } else {
-                int tens = num / 10;
-                if (tens <= 9) {
-                    result.append(TENS[tens]);
+                //int tens = num / 10;
+                //if (tens <= 9) {
+                    result.append(TENS[num/10]);
                     num = num % 10;
                     result.append(" ").append(LESS_THAN_TWENTY[num]);
-                }
+                //}
             }
             num = 0;
         }

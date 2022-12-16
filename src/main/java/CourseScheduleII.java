@@ -1,6 +1,6 @@
 import java.util.*;
 
-//https://leetcode.com/problems/course-schedule/
+//https://leetcode.com/problems/course-schedule-ii/
 public class CourseScheduleII {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         //course catalog

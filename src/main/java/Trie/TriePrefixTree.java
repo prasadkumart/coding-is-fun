@@ -1,22 +1,23 @@
+package Trie;
+
 //https://leetcode.com/problems/implement-trie-prefix-tree/
 //https://www.youtube.com/watch?v=0k79LqIaHyQ&list=PLEJXowNB4kPyi859E6qGUs7jlpQehJndl&index=2&ab_channel=TECHDOSE
-public class Trie {
+public class TriePrefixTree {
     Node root;
-    public Trie() {
+    public TriePrefixTree() {
         root = new Node('\0');
     }
 
     //O(M) TS - M IS the length of the word
     public void insert(String word) {
         Node curr = root;
-        for(int i=0;i<word.length();i++) {
-            char c = word.charAt(i);
-            if (curr.children[c-'a'] == null) {
-                curr.children[c-'a'] = new Node(c);
+        for (char c : word.toCharArray()) {
+            int ind = c-'a';
+            if (curr.children[ind] == null) {
+                curr.children[ind] = new Node(c);
             }
-
             //new current
-            curr = curr.children[c-'a'];
+            curr = curr.children[ind];
         }
         curr.isWord = true;
     }
@@ -26,13 +27,13 @@ public class Trie {
     public boolean search(String word) {
         //Node node = getNode(word);
         //return node != null && node.isWord;
-        return dfs(root, 0, word);
+        return dfs(root, 0, word, false);
     }
 
     //O(M) - M IS the length of the word
     //O(1) S
     public boolean startsWith(String prefix) {
-        return dfs(root, 0, prefix);
+        return dfs(root, 0, prefix, true);
         //Node node = getNode(prefix);
         //return node != null;
     }
@@ -53,9 +54,14 @@ public class Trie {
         return curr;
     }
 
-    private boolean dfs(Node node, int count, String word) {
-        if (count == word.length() && node.isWord) {
-            return true;
+    private boolean dfs(Node node, int count, String word, boolean prefix) {
+        if (count == word.length()) {
+            if (prefix) {
+                return true;
+            }
+            if (node.isWord) {
+                return true;
+            }
         }
 
         if (count >= word.length()) {
@@ -70,7 +76,7 @@ public class Trie {
             for(int j=0;j<26;j++) {
                 Node newNode = node.children[j];
                 if (newNode != null) {
-                    if (dfs(newNode, count + 1, word)) {
+                    if (dfs(newNode, count + 1, word, prefix)) {
                         subFlag = true;
                         break;
                     }
@@ -85,7 +91,7 @@ public class Trie {
             int index = c - 'a';
             Node newNode = node.children[index];
             if (newNode != null) {
-                return dfs(newNode, count+1, word);
+                return dfs(newNode, count+1, word, prefix);
             } else {
                 return false;
             }
@@ -107,11 +113,11 @@ public class Trie {
         }
     }
     public static void main(String[] args) {
-     Trie obj = new Trie();
+     TriePrefixTree obj = new TriePrefixTree();
      obj.insert("apple");
      System.out.println(obj.search("apple"));
      System.out.println(obj.search("app"));
-     //System.out.println(obj.startsWith("app"));
+     System.out.println(obj.startsWith("app"));
      System.out.println(obj.search("a.p.e"));
     }
 

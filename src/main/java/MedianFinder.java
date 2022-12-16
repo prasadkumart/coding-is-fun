@@ -9,7 +9,7 @@ public class MedianFinder {
     PriorityQueue<Integer> minHeap = null;
 
     public MedianFinder() {
-        maxHeap = new PriorityQueue<>((a, b) -> (b - a));
+        maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b,a));
         minHeap = new PriorityQueue<>();
     }
 
@@ -56,10 +56,10 @@ public class MedianFinder {
     }
 
     private void balance() {
-        //leftside had more element
-        if (Math.abs(maxHeap.size() - minHeap.size()) > 1) {
+        //left side had more element
+        if (maxHeap.size() > minHeap.size()+1) {
             minHeap.add(maxHeap.poll());
-        } else if (minHeap.size() - maxHeap.size() > 1) {
+        } else if (minHeap.size() > maxHeap.size()) {
             maxHeap.add(minHeap.poll());
         }
     }
