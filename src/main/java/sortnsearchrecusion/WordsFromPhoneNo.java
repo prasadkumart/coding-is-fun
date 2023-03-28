@@ -9,7 +9,7 @@ import java.util.ArrayList;
 // mappings - O(1)
 // auxiliary space/slate - O(N)
 // output/result - O(4^N), where N is the length of digits
-public class WorkdsFromPhoneNo {
+public class WordsFromPhoneNo {
     static int length;
     static ArrayList<String> get_words_from_phone_number(String phone_number) {
         ArrayList<String> result = new ArrayList<>();

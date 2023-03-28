@@ -29,14 +29,14 @@ public class CountIslands {
         return numIslands;
     }
 
-    private static void dfsHelper(int i, int j, ArrayList<ArrayList<Integer>> matrix) {
+    private static void dfsHelper(int row, int col, ArrayList<ArrayList<Integer>> matrix) {
         //mark cell as visited
-        matrix.get(i).set(j, 0);
+        matrix.get(row).set(col, 0);
 
         //visit all around including diagonal
         for (int[] direction : directions) {
-            int newRow = i + direction[0];
-            int newCol = j + direction[1];;
+            int newRow = row + direction[0];
+            int newCol = col + direction[1];
             //base case
             if ( (newRow<0||newRow>=matrix.size()) || (newCol<0||newCol>=matrix.get(0).size())) {
                 continue;

@@ -1,0 +1,53 @@
+create table companies(company_id integer, company_name varchar(100));
+insert into companies(company_id, company_name) values (1,'Google');
+insert into companies(company_id, company_name) values (2,'Meta');
+insert into companies(company_id, company_name) values (3,'Amazon');
+insert into companies(company_id, company_name) values (4,'Airbnb');
+insert into companies(company_id, company_name) values (5,'Netflix');
+insert into companies(company_id, company_name) values (6,'Microsoft');
+insert into companies(company_id, company_name) values (7,'IK');
+insert into companies(company_id, company_name) values (8,'Apple');
+insert into companies(company_id, company_name) values (9,'Uber');
+select * from companies;
+
+
+create table job_titles(jobtitle_id integer, jobtitle_name varchar(100));
+insert into job_titles(jobtitle_id, jobtitle_name) values(101,'Software Developer');
+insert into job_titles(jobtitle_id, jobtitle_name) values(102,'Product Manager');
+insert into job_titles(jobtitle_id, jobtitle_name) values(103,'Sales Associate');
+insert into job_titles(jobtitle_id, jobtitle_name) values(104,'Network Solutions Engineer');
+insert into job_titles(jobtitle_id, jobtitle_name) values(105,'HR');
+insert into job_titles(jobtitle_id, jobtitle_name) values(106,'Marketing Manager');
+insert into job_titles(jobtitle_id, jobtitle_name) values(107,'Dig Marketing Manager');
+insert into job_titles(jobtitle_id, jobtitle_name) values(108,'IT Consulatant');
+insert into job_titles(jobtitle_id, jobtitle_name) values(109,'DevOps Eng');
+insert into job_titles(jobtitle_id, jobtitle_name) values(110,'UI/UX Designer');
+insert into job_titles(jobtitle_id, jobtitle_name) values(111,'IOS Dev');
+insert into job_titles(jobtitle_id, jobtitle_name) values(112,'Information Security Eng');
+insert into job_titles(jobtitle_id, jobtitle_name) values(113,'Data Engineer');
+insert into job_titles(jobtitle_id, jobtitle_name) values(114,'Operations Manager');
+select * from job_titles;
+
+create table salaryinfo(company_id integer, jobtitle_id integer, average_salary DECIMAL(13,2));
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(1, 101, 88000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(1, 109, 75000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(1, 105, 100000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(1, 107, 55000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(2, 105, 65000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(2, 108, 2300000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(2, 102, 67000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(3, 106, 78500);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(3, 109, 98500);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(4, 110, 150000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(5, 107, 55000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(6, 103, 75000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(7, 101, 80000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(7, 114, 78500);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(8, 102, 50000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(9, 103, 130000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(9, 104, 150000);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(9, 111, 17500);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(9, 112, 23500);
+insert into salaryinfo(company_id, jobtitle_id, average_salary) values(9, 113, 45000);
+select * from salaryinfo;
+
