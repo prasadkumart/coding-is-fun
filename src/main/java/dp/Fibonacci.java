@@ -44,7 +44,7 @@ public class Fibonacci {
         return memo[n];
     }
 
-    //bottom-up-iterative-memoization
+    //bottom-up-iterative-memoization (iterative tabulation)
     static int bottomUpFib(int n) {
         if (n==0) {
             return 0;

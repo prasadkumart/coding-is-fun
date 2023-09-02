@@ -1,7 +1,6 @@
 //https://leetcode.com/problems/trapping-rain-water/
 //https://www.youtube.com/watch?v=ZI2z5pq0TqA&ab_channel=NeetCode
 public class TrapRainWater {
-
     //O(N) TS
     public static int trapUsingArrays(int[] height) {
         if (null == height || height.length < 2) return 0;

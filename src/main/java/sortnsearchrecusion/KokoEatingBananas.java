@@ -75,5 +75,6 @@ public class KokoEatingBananas {
         System.out.println(new KokoEatingBananas().minEatingSpeedBinSearch(new int[] {30,11,23,4,20}, 5)); //30
         System.out.println(new KokoEatingBananas().minEatingSpeedBinSearch(new int[] {30,11,23,4,20}, 6)); //23
         System.out.println(new KokoEatingBananas().minEatingSpeedBinSearch(new int[] {1000,000,000}, 2)); //23
+        System.out.println(new KokoEatingBananas().minEatingSpeed(new int[] {5,5,5}, 15)); //23
     }
 }
