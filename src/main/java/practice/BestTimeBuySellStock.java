@@ -25,14 +25,14 @@ public class BestTimeBuySellStock {
         if (null == prices || prices.length == 0 || prices.length == 1) {
             return profit;
         }
-        int buy_price = prices[0];
+        int buyPrice = prices[0];
 
         for(int i=1; i<prices.length; i++) {
             //find min for buying point
-            if (buy_price > prices[i]) {
-                buy_price = prices[i];
+            if (buyPrice > prices[i]) {
+                buyPrice = prices[i];
             } else {
-                profit = Math.max(profit, prices[i] - buy_price);
+                profit = Math.max(profit, prices[i] - buyPrice);
             }
         }
 

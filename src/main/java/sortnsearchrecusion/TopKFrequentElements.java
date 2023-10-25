@@ -11,7 +11,7 @@ public class TopKFrequentElements {
     public int[] topKFrequent(int[] nums, int k) {
         int[] result = new int[k];
 
-        //each elements apprearance in the table
+        //each element's appearance in the table
         HashMap<Integer, Integer> bucket1 = new HashMap<>(); //O(n)
         for (int num : nums) {
             bucket1.put(num, bucket1.getOrDefault(num, 0) + 1);

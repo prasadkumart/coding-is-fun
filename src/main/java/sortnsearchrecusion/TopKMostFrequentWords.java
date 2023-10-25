@@ -13,6 +13,14 @@ public class TopKMostFrequentWords {
             fMap.put(word, fMap.getOrDefault(word, 0) + 1);
         }
 
+        PriorityQueue p = new PriorityQueue(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer i1, Integer i2) {
+                return fMap.get(i1)-fMap.get(i2);
+            }
+        });
+
+
         //priorityQueue with a custom comparator
         //PQ used min/maxHeap under the hood
         //worst case insertion is O(log n) best case is O(1)

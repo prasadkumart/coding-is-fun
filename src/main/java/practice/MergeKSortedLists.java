@@ -1,9 +1,12 @@
 package practice;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class MergeKSortedLists {
 
+    //to push or pop element from PQ/Heap is - log N
+    //here heap size is K - log K
     //K -#of lists; N - # of elements from all lists
     //TC: O(N log K)
     //SCL O(N) - size of the PriorityQueue
@@ -12,28 +15,28 @@ public class MergeKSortedLists {
             return null;
         }
 
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> Integer.compare(a.val, b.val));
-        for(int i=0; i<lists.length; i++) { //O(K)
-            if (null != lists[i]) {
-                pq.add(lists[i]); //O(log K) // one node from each list is added to PQ
+        PriorityQueue<ListNode> queue = new PriorityQueue(new Comparator<ListNode>(){
+            @Override
+            public int compare(ListNode l1, ListNode l2) {
+                return l1.val - l2.val;
+            }
+        });
+        for(ListNode listNode : lists) {
+            if (null != listNode) {
+                queue.add(listNode); //log K
             }
         }
-
-        ListNode head = null;
-        ListNode tail = null;
-
-        while(!pq.isEmpty()) { //O(N) N: total no of elements in all lists
-            ListNode curr = pq.poll();
-
-            if (null == head) {
-                head = tail = curr;
-            } else {
-                tail.next = curr;
-                tail = curr;
-            }
-
-            if (curr.next != null) {
-                pq.add(curr.next); //O(log K), repeated for N times, total TC: O(N * log K)
+        ListNode head = queue.poll();
+        if (head != null && head.next != null) {
+            queue.add(head.next);
+        }
+        ListNode tail = head;
+        while(!queue.isEmpty()) {
+            ListNode currNode = queue.poll();
+            tail.next = currNode;
+            tail = tail.next;
+            if (currNode.next != null) {
+                queue.add(currNode.next);
             }
         }
 

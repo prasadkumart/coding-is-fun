@@ -10,6 +10,7 @@ public class Conversion {
         list.add("second");
         list.add("third");
 
+        //:: method reference operator - call a method directly using class name
         //list to array
         String[] arr = list.toArray(String[]::new);
         //String[] arr = list.toArray(new String[list.size()]);

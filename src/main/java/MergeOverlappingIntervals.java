@@ -18,14 +18,16 @@ public class MergeOverlappingIntervals {
             }
         }
 
-        return merged.toArray(new int[merged.size()][]);
+        //return merged.toArray(int[][]::new);
+        int[][] result = new int[merged.size()][];
+        return merged.toArray(result);
     }
 
     public static void main(String[] args) {
         int[][] result = new MergeOverlappingIntervals().merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}});
-        System.out.println(Arrays.deepToString(result));
+        System.out.println(Arrays.deepToString(result));//[[1, 6], [8, 10], [15, 18]]
 
-        result = new MergeOverlappingIntervals().merge(new int[][]{{1, 2}, {3, 6}, {8, 9}, {9, 18}});
+        result = new MergeOverlappingIntervals().merge(new int[][]{{1, 2}, {3, 6}, {8, 9}, {9, 18}});//[[1, 2], [3, 6], [8, 18]]
         System.out.println(Arrays.deepToString(result));
     }
 }

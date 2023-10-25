@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class MergeIntervals {
     public int[][] merge(int[][] intervals) {
         //sort arrays
-        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0])); //O(NlonN) T
+        Arrays.sort(intervals, (inteval1,interval2) -> Integer.compare(inteval1[0],interval2[0])); //O(NlonN) T
 
         LinkedList<int[]> merged = new LinkedList<>();
         for (int[] interval : intervals) { //O(N) T
@@ -23,10 +23,10 @@ public class MergeIntervals {
     }
 
     public static void main(String[] args) {
-        int[][] result = new MergeIntervals().merge(new int[][]{{1, 2}, {3, 4}, {9, 10}, {7, 8}});
+        int[][] result = new MergeIntervals().merge(new int[][]{{1, 2}, {3, 4}, {9, 10}, {7, 8}}); //[[1, 4], [7, 10]]
         System.out.println(Arrays.deepToString(result));
 
-        result = new MergeIntervals().merge(new int[][]{{5, 6}, {1, 2}, {3, 4}, {8, 9}, {10, 18}});
+        result = new MergeIntervals().merge(new int[][]{{5, 6}, {1, 2}, {3, 4}, {8, 9}, {10, 18}}); //[[1, 6], [8, 18]]
         System.out.println(Arrays.deepToString(result));
     }
 }
