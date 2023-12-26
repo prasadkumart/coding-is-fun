@@ -1,6 +1,10 @@
 package practice;
 
 //https://leetcode.com/problems/maximum-product-subarray/
+//TC: O(n)
+//KADANCE's Algo
+
+//SC: O(1)
 public class MaxProductSubarray {
     public int maxProduct(int[] nums) {
         if (null == nums || nums.length == 0) {
