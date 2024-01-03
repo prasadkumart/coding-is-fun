@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-//TC: O(n^3)
-//SC: O(n^2)
+//TC: O(n^3) for 3 NESTED LOOPS
+//SC: O(n) - auxiliary memory used for sorting
 //https://leetcode.com/problems/3sum/
 public class TripletSum {
 
