@@ -3,6 +3,8 @@ package practice;
 import java.util.List;
 
 //https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+//TC: O(n)
+//SC: O(1)
 public class ReverseLinkedListKGroup {
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode curr = head;

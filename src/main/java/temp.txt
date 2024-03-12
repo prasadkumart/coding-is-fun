@@ -1,0 +1,132 @@
+class MKAverage {
+    int m, k;
+    TreeMap<Integer, Integer> hi, mid, lo;
+    Queue<Integer> q;
+    int midSum, hiSize, loSize;
+
+    public MKAverage(int m, int k) {
+        this.m = m;
+        this.k = k;
+        hi = new TreeMap<>();
+        mid = new TreeMap<>();
+        lo = new TreeMap<>();
+        q = new LinkedList<>();
+        midSum = 0;
+        hiSize = 0;
+        loSize = 0;
+    }
+
+    public void addElement(int num) {
+            q.offer(num);
+            add(num); // add to trees, and rebalance.
+
+            if (q.size() > m) {
+                int top = q.poll();
+                remove(top); // remove from trees, and rebalance.
+            }
+        }
+
+        public int calculateMKAverage() {
+            if (q.size() < m)
+                return -1;
+            return midSum / (m - 2 * k);
+        }
+
+    void add(int num) {
+             addToMap(hi, num);
+             hiSize++;
+
+             if (hiSize > k) {
+                 int x = hi.firstKey();
+                 removeFromMap(hi, x);
+                 hiSize--;
+
+                 addToMap(lo, x);
+                 loSize++;
+             }
+
+             if (loSize > k) {
+                 int x = lo.lastKey();
+                 removeFromMap(lo, x);
+                 loSize--;
+
+                 addToMap(mid, x);
+                 midSum += x;
+             }
+         }
+
+    void remove(int num) {
+            if (hi.containsKey(num)) {
+                removeFromMap(hi, num);
+                int x = mid.lastKey();
+                removeFromMap(mid, x);
+                midSum -= x;
+                addToMap(hi, x);
+            } else if (lo.containsKey(num)) {
+                removeFromMap(lo, num);
+                int x = mid.firstKey();
+                removeFromMap(mid, x);
+                midSum -= x;
+                addToMap(lo, x);
+            } else if (mid.containsKey(num)) {
+                removeFromMap(mid, num);
+                midSum -= num;
+            }
+        }
+
+
+    void removeFromMap(TreeMap<Integer, Integer> map, int num) {
+            map.put(num, map.get(num) - 1);
+            if (map.get(num) == 0) {
+                map.remove(num);
+            }
+        }
+
+        void addToMap(TreeMap<Integer, Integer> map, int num) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+    }
+
+
+class MyCalendar {
+    List<int[]> list; // list of meetings
+
+    MyCalendar() {
+        list = new ArrayList();
+    }
+
+    public boolean book(int start, int end) {
+        for (int[] meeting : list) {
+            if (start <= meeting[0]) {
+                if (end > meeting[0])
+                    return false;
+            } else {
+                if (start < meeting[1])
+                    return false;
+            }
+        }
+        list.add(new int[] { start, end });
+        return true;
+    }
+}
+class MyCalendar {
+    TreeMap<Integer, Integer> map;
+
+    MyCalendar() {
+        map = new TreeMap();
+    }
+
+    public boolean book(int start, int end) {
+        Integer prev = map.floorKey(start);
+        Integer next = map.ceilingKey(start);
+
+        if (prev != null && map.get(prev) > start)
+            return false;
+        if (next != null && end > next)
+            return false;
+
+        map.put(start, end);
+        return true;
+    }
+}
+

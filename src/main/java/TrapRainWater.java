@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 //https://leetcode.com/problems/trapping-rain-water/
 //https://www.youtube.com/watch?v=ZI2z5pq0TqA&ab_channel=NeetCode
 public class TrapRainWater {
@@ -41,8 +43,40 @@ public class TrapRainWater {
         return total;
     }
 
+
+    public static int trapMonoStack(int[] height) {
+        int total = 0;
+        Stack<Integer> stack = new Stack<>();
+        for(int curr=0; curr<height.length; curr++) {
+            while (!stack.isEmpty() && height[curr] > height[stack.peek()]) {
+                int popIdx = stack.pop();
+
+                //base case - no previous bar
+                if (stack.isEmpty()) {
+                    break;
+                }
+
+                //calculate bounded height
+                //min(previous bar, current height) - popped height
+                //boundedHeight is zero, when popped index height and previous bar height are same
+                int boundedHeight = Math.min(height[stack.peek()], height[curr]) - height[popIdx];
+
+                //calculate distance - distance between current and previous bars
+                int distance = curr - stack.peek() - 1;
+
+                total += boundedHeight * distance;
+            }
+            stack.add(curr);
+        }
+
+        return total;
+    }
+
     public static void main(String[] args) {
-        System.out.println(trapUsingArrays(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
-        System.out.println(trapUsingArrays(new int[]{4,6,8}));
+        System.out.println(trapUsingArrays(new int[]{0,1,0,2,1,0,1,3,2,1,2,1})); //6
+        System.out.println(trapUsingArrays(new int[]{4,6,8})); //0
+        System.out.println(trapMonoStack(new int[]{0,1,0,2,1,0,1,3,2,1,2,1})); //6
+        System.out.println(trapMonoStack(new int[]{0,1,0,2,1,0,0,1,3,2,1,2,1})); //8
+        System.out.println(trapMonoStack(new int[]{4,6,8})); //0
     }
 }

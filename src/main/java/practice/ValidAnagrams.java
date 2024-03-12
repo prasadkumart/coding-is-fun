@@ -12,6 +12,8 @@ public class ValidAnagrams {
             return false;
         }
 
+        //USING COUNTER
+        /*
         //constant array size, so same space used for all strings, SC: O(1)
         int[] frequencyCounter = new int[26];
 
@@ -26,8 +28,36 @@ public class ValidAnagrams {
                 return false;
             }
         }
-
         return true;
+        */
+
+        //USING HASH-KEY (CHAR COUNT DELIMITER WITH #)
+        //aabcc(#3#1#2)
+        //acdd(#1#0#1#2)
+        int[] frequencyCounter = new int[26];
+
+        for(int i=0; i<sLen; i++) {
+            frequencyCounter[s.charAt(i)-'a']++;
+        }
+
+        StringBuilder sb1 = new StringBuilder();
+        for(int i=0; i<26; i++) {
+            sb1.append("#");
+            sb1.append(frequencyCounter[i]);
+        }
+
+        frequencyCounter = new int[26];
+        for(int i=0; i<tLen; i++) {
+            frequencyCounter[t.charAt(i)-'a']++;
+        }
+
+        StringBuilder sb2 = new StringBuilder();
+        for(int i=0; i<26; i++) {
+            sb2.append("#");
+            sb2.append(frequencyCounter[i]);
+        }
+
+        return sb1.toString().equals(sb2.toString());
     }
 
     public static void main(String[] args) {
